@@ -15,10 +15,10 @@
  */
 package org.slim3.tester;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.WriteListener;
 import java.io.IOException;
 import java.io.OutputStream;
-
-import javax.servlet.ServletOutputStream;
 
 /**
  * An implementation for {@link ServletOutputStream}.
@@ -55,4 +55,13 @@ public class MockServletOutputStream extends ServletOutputStream {
         outputStream.write(b);
     }
 
+    @Override
+    public boolean isReady() {
+        return false;
+    }
+
+    @Override
+    public void setWriteListener(WriteListener writeListener) {
+
+    }
 }

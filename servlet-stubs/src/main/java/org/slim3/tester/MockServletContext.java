@@ -15,20 +15,12 @@
  */
 package org.slim3.tester;
 
+import javax.servlet.*;
+import javax.servlet.descriptor.JspConfigDescriptor;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import java.util.*;
 
 
 /**
@@ -117,6 +109,16 @@ public class MockServletContext implements ServletContext, Serializable {
 
     public int getMinorVersion() {
         return MINOR_VERSION;
+    }
+
+    @Override
+    public int getEffectiveMajorVersion() {
+        return getMajorVersion();
+    }
+
+    @Override
+    public int getEffectiveMinorVersion() {
+        return getMinorVersion();
     }
 
     public String getMimeType(String file) {
@@ -265,8 +267,9 @@ public class MockServletContext implements ServletContext, Serializable {
      * @param value
      *            the value
      */
-    public void setInitParameter(String name, String value) {
+    public boolean setInitParameter(String name, String value) {
         initParameterMap.put(name, value);
+        return true;
     }
 
     /**
@@ -297,6 +300,126 @@ public class MockServletContext implements ServletContext, Serializable {
 
     public String getServletContextName() {
         return servletContextName;
+    }
+
+    @Override
+    public ServletRegistration.Dynamic addServlet(String servletName, String className) {
+        return null;
+    }
+
+    @Override
+    public ServletRegistration.Dynamic addServlet(String servletName, Servlet servlet) {
+        return null;
+    }
+
+    @Override
+    public ServletRegistration.Dynamic addServlet(String servletName, Class<? extends Servlet> servletClass) {
+        return null;
+    }
+
+    @Override
+    public <T extends Servlet> T createServlet(Class<T> clazz) throws ServletException {
+        return null;
+    }
+
+    @Override
+    public ServletRegistration getServletRegistration(String servletName) {
+        return null;
+    }
+
+    @Override
+    public Map<String, ? extends ServletRegistration> getServletRegistrations() {
+        return null;
+    }
+
+    @Override
+    public FilterRegistration.Dynamic addFilter(String filterName, String className) {
+        return null;
+    }
+
+    @Override
+    public FilterRegistration.Dynamic addFilter(String filterName, Filter filter) {
+        return null;
+    }
+
+    @Override
+    public FilterRegistration.Dynamic addFilter(String filterName, Class<? extends Filter> filterClass) {
+        return null;
+    }
+
+    @Override
+    public <T extends Filter> T createFilter(Class<T> clazz) throws ServletException {
+        return null;
+    }
+
+    @Override
+    public FilterRegistration getFilterRegistration(String filterName) {
+        return null;
+    }
+
+    @Override
+    public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
+        return null;
+    }
+
+    @Override
+    public SessionCookieConfig getSessionCookieConfig() {
+        return null;
+    }
+
+    @Override
+    public void setSessionTrackingModes(Set<SessionTrackingMode> sessionTrackingModes) {
+
+    }
+
+    @Override
+    public Set<SessionTrackingMode> getDefaultSessionTrackingModes() {
+        return null;
+    }
+
+    @Override
+    public Set<SessionTrackingMode> getEffectiveSessionTrackingModes() {
+        return null;
+    }
+
+    @Override
+    public void addListener(String className) {
+
+    }
+
+    @Override
+    public <T extends EventListener> void addListener(T t) {
+
+    }
+
+    @Override
+    public void addListener(Class<? extends EventListener> listenerClass) {
+
+    }
+
+    @Override
+    public <T extends EventListener> T createListener(Class<T> clazz) throws ServletException {
+        return null;
+    }
+
+    @Override
+    public JspConfigDescriptor getJspConfigDescriptor() {
+        return null;
+    }
+
+    @Override
+    public ClassLoader getClassLoader() {
+        return null;
+    }
+
+    @Override
+    public void declareRoles(String... roleNames) {
+
+    }
+
+    @Override
+    public String getVirtualServerName() {
+        return null;
     }
 
     /**

@@ -15,21 +15,14 @@
  */
 package org.slim3.tester;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /**
  * A mock implementation for {@link MockHttpServletResponse}.
@@ -320,12 +313,8 @@ public class MockHttpServletResponse implements HttpServletResponse {
      *            the name
      * @return the header
      */
-    public Enumeration<String> getHeaders(String name) {
-        List<String> values = getHeaderList(name);
-        if (values == null) {
-            values = Collections.emptyList();
-        }
-        return Collections.enumeration(values);
+    public Collection<String> getHeaders(String name) {
+        return getHeaderList(name);
     }
 
     /**
@@ -383,8 +372,8 @@ public class MockHttpServletResponse implements HttpServletResponse {
      * 
      * @return the header names
      */
-    public Enumeration<String> getHeaderNames() {
-        return Collections.enumeration(headerMap.keySet());
+    public Collection<String> getHeaderNames() {
+        return Collections.unmodifiableCollection(headerMap.keySet());
     }
 
     public void setHeader(String name, String value) {
@@ -414,6 +403,10 @@ public class MockHttpServletResponse implements HttpServletResponse {
         setHeader(name, HeaderUtil.convertIntToString(value));
     }
 
+    public void setLongHeader(String name, long value) {
+        setHeader(name, Long.toString(value));
+    }
+
     public void addIntHeader(String name, int value) {
         addHeader(name, HeaderUtil.convertIntToString(value));
     }
@@ -429,6 +422,12 @@ public class MockHttpServletResponse implements HttpServletResponse {
 
     public void setContentLength(int contentLength) {
         setIntHeader("content-length", contentLength);
+    }
+
+    @Override
+    public void setContentLengthLong(long len) {
+        setLongHeader("content-length", len);
+
     }
 
     public String getContentType() {
