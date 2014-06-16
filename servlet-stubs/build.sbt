@@ -4,9 +4,9 @@ organization := "soot.javaee.stubs"
 
 version := "0.1-SNAPSHOT"
 
-scalaVersion := "2.11.0"
+scalaVersion := Versions.scala
 
-sbtVersion := "0.13.2"
+sbtVersion := Versions.sbt
 
 Common.settings
 
