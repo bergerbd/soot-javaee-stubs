@@ -10,4 +10,4 @@ sbtVersion := Versions.sbt
 
 Common.settings
 
-libraryDependencies += "javax.servlet" % "javax.servlet-api" % "3.1.0"
+libraryDependencies += "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided"
